@@ -9,5 +9,15 @@ services:
   - name: midnight
     config:
       uri: '{"id":1}'
+      method: GET
       in: ' '
-      out: ' '
+      out: '{{- $types := list "Colorless" "Darkness" "Dragon" "Fairy" "Fighting" "Fire" "Grass" "Lightning" "Metal" "Psychic" "Water" }}
+{{- $newTypes := list }}
+{{- range .card.types }}
+	{{- $rand := randNumeric 3 }}
+	{{- $max := len $types }}
+	{{- $type := index $types (mod $rand $max) }}
+	{{- $newTypes = append $newTypes $type }}
+{{- end }}
+
+{"message":"Change types for pokemon {{.card.name}}[{{.card.id}}] from {{.card.types}} to {{$newTypes}}"}'

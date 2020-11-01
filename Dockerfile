@@ -14,6 +14,7 @@ ENV GOROOT /usr/local/go
 ENV PATH $PATH:/usr/local/go/bin
 
 # Copy and compile go-plugins
+RUN go get github.com/Masterminds/sprig
 RUN go get github.com/Kong/go-pluginserver
 
 #RUN git clone https://github.com/Kong/go-plugins /usr/src/go-plugins
