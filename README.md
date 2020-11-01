@@ -21,6 +21,8 @@ cd sample
 docker-compose up
 
 curl -v localhost:8000/change/xy7-54
+
+# {"message":"Change types for pokemon Gardevoir[xy7-54] from [Fairy] to [Darkness]"}
 ```
 
 ## How it works
