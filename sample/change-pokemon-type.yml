@@ -1,0 +1,13 @@
+# change-pokemon-type.yml
+_format_version: "1.1"
+services:
+- url: https://api.pokemontcg.io/v1/cards/:id
+  routes:
+  - paths:
+    - "/change/.+"
+  plugins:
+  - name: midnight
+    config:
+      uri: '{"id":1}'
+      in: ' '
+      out: ' '
