@@ -57,6 +57,10 @@ func kongError(err error, kong *pdk.PDK) {
 	}
 }
 
+func sprigTmpl(n string) *template.Template {
+	return template.New(n).Funcs(sprig.TxtFuncMap())
+}
+
 func BuildTmpl(data []byte, tmpl string) (compiled string, err error) {
 	if tmpl == " " {
 		return string(data), nil
@@ -82,8 +86,7 @@ func BuildTmpl(data []byte, tmpl string) (compiled string, err error) {
 
 func BuildPath(cfgUri, svcPath, reqPath string) (path string, err error) {
 	if cfgUri == " " {
-		path = svcPath
-		return
+		return svcPath, nil
 	}
 	mapUri := make(map[string]int)
 	err = json.Unmarshal([]byte(cfgUri), &mapUri)
@@ -133,8 +136,4 @@ func HttpReq(method, url, body string) (data []byte, err error) {
 	data = buf.Bytes()
 
 	return
-}
-
-func sprigTmpl(n string) *template.Template {
-	return template.New(n).Funcs(sprig.TxtFuncMap())
 }
