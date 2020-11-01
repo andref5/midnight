@@ -7,6 +7,15 @@ go build -buildmode plugin midnight.go
 ```
 
 ## Test
+
+In [sample/change-pokemon-type.yml](change-pokemon-type.yml) has the configuration for the kong service / route and plugin that makes the transformation in the api https://docs.pokemontcg.io/#api_v1cards_get. With the following flow:
+
+  - Change service path [:id] v1/cards/:id with path request [.+] /change/.+
+  - Make request to api
+  - To each response "card.types" random new type
+  - Build result on "message"
+  - Return to client
+
 ```
 cd sample
 docker-compose up
@@ -36,7 +45,7 @@ curl -v localhost:8000/change/xy7-54
           # become
           /v1/cards/xy7-54
 
-    - [in/out] - Golang template to build with request params ([in]) to change request body to upstream and response params ([out]) to change resposen body to client. Midnigth add useful template sprig functions http://masterminds.github.io/sprig/
+    - [in/out] - golang template to build with request params ([in]) to change request body to upstream and response params ([out]) to change resposen body to client. Midnigth add useful template sprig functions http://masterminds.github.io/sprig/
     
           EX.
           # response body
